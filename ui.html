@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Tabs - Default functionality</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+ 
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+ 
+  <script>
+  $( function() {
+    $( "#accordion" ).accordion();
+    $( "#tabs" ).tabs();
+    $( ".widget input[type=submit], .widget a, .widget button" ).button();
+    $("#form").validate()
+    $.ajax({
+        url         : "http://localhost/jsondata/",
+        type        : "POST",
+        dataType    : "json",
+        data        : {
+                          nim:  6701210087,
+                          hobi: "travelling"
+                      },
+        success     : function(data){
+          console.log(data)
+                    // proses response ajax call
+                    $('#tabel').dataTable({
+                        "data" : data,
+                        "columns" : [
+                            { "data" : "nim" },
+                            { "data" : "hobi" },
+                            { "data" : "hobi" },
+                        ],
+                        serverSide: false
+                    })
+                }
+            })
+  } );
+  </script>
+</head>
+<body>
+ <div id="container">
+    <div class="row">
+        <div class="col-md-2">
+            <div id="accordion">
+            <h3>Section 1</h3>
+            <div>
+              <p>
+              Section 1
+              </p>
+            </div>
+            <h3>Section 2</h3>
+            <div>
+              <p>
+              Section 2
+              </p>
+            </div>
+            <h3>Section 3</h3>
+            <div>
+              <p>
+              Section 3
+              </p>
+              <ul>
+                <li>List item one</li>
+                <li>List item two</li>
+                <li>List item three</li>
+              </ul>
+            </div>
+            <h3>Section 4</h3>
+            <div>
+              <p>
+              Section 4
+              </p>
+              <p>
+              Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+              Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+              inceptos himenaeos.
+              </p>
+            </div>
+          </div></div>
+        <div class="col-md-10">
+            <div id="tabs">
+            <ul>
+              <li><a href="#tabs-1">Datatable</a></li>
+              <li><a href="#tabs-2">Form</a></li>
+
+            </ul>
+            <div id="tabs-1">
+              
+              <table border="1" id="tabel">
+                  <thead>
+                      <th>Name</th>
+                      <th>Username</th>
+                      <th>Email</th>
+                  </thead>
+              </table>
+            </div>
+            <div id="tabs-2">
+              <div id="body"> 
+                  <form action="" method="get" id="form" >
+                      <b>Data mahasiswa</b><br>
+                      <input type="text" name="nama" class="angka1" placeholder="Nama Mahasiswa" required/><br>
+                      <input type="text" name="nim" id="angka2" placeholder="Nim Mahasiswa" required/><br>
+                      <select name="operasi" id="operasi">
+                          <option value="+">+</option>
+                          <option value="-">-</option>
+                          <option value="*">*</option>
+                          <option value="/">/</option>
+                      </select>
+                      
+                      <input type="button" class="ui-button ui-widget ui-corner-all" value="Tambah input" onclick="tambahInput()"/><br>
+                      <button type="button" id="tombol" class="ui-button ui-widget ui-corner-all">Show input</button><br>
+                      <input type="submit"class="ui-button ui-widget ui-corner-all" value="Click me" /><br>
+                      <br>
+                  </form>
+              </div>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+ 
+ 
+</body>
+</html>
